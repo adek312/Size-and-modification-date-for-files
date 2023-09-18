@@ -21,8 +21,8 @@ def main():
         for plik in file_list:
             full_path = os.path.join(type_path, plik)
             size = os.path.getsize(full_path)
-            megabyte_size = bytes_to_megabytes(size)
-            print('Plik {} waży: {}MB'.format(plik, megabyte_size))
+            megaOrGiga = megabytes_or_gigabytes(size)
+            print('Plik {} waży: {}'.format(plik, megaOrGiga))
                
         # Wylistowanie wszystkich plikow i ich daty modyfikacji 
     elif (choice == '2'):
@@ -35,19 +35,14 @@ def main():
     else:
         print("niepoprawny wybór")
 
-    
-
-# Zamiana bajtow na megabajty
-def bytes_to_megabytes(bytes):
-    megabytes = bytes / (1024*1024)
-    formatted_megabytes = "{:.2f}".format(megabytes)
-    return formatted_megabytes
-
-# Zamiana bajtow na gigabajty
-def bytes_to_gigabytes(bytes):
-    gigabytes = bytes / ()
-    formatted_gigabytes = "{:.2f}".format(gigabytes)
-    return formatted_gigabytes
+# Sprawdzenie czy plik jest w GB czy MB
+def megabytes_or_gigabytes(bytes):
+    if bytes >= 1024 ** 3: 
+        Gbytes = bytes / (1024 ** 3)
+        return f"{Gbytes:.2f} GB"
+    else: 
+        Mbytes = bytes / (1024 ** 2)
+        return f"{Mbytes:.2f} MB"
     
 # Wywolanie glownej funkcji przy starcie skryptu
 if __name__ == "__main__":
