@@ -1,0 +1,12 @@
+zrobione:
+Podanie ścieżki
+wybór co chce sprawdzic
+wylistowanie pliku i folderu z informacjami
+
+niezrobione:
+sortowanie danych wedlug wielkosci
+sprawdzenie czy to plik czy folder
+zmiana mb na gb jesli to potrzebne
+
+pomysly:
+dodać jakieś dodatki
