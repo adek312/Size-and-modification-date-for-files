@@ -3,19 +3,27 @@ import datetime
 import pathlib
 
 def main():
-    # Uzyskanie sciezki od uzytkownika
-    print("Podaj ścieżkę do folderu zgodnie ze wzorem: X:\\folder\\folder\\plik")
-    type_path = input()
+    
+    while True:
+        try:
+            print("Podaj ścieżkę do folderu zgodnie ze wzorem: X:\\folder\\folder\\plik")
+            type_path = input()
+            if os.path.exists(type_path):
+                break
+        except FileNotFoundError:
+            print("Zły format")
+    
+    
+
+    # Przechowanie listy wszystkich plikow ze sciezki
+    file_list = os.listdir(type_path)
     
     # Wybor co uzytkownik chce sprawdzic
     print("Co chcesz sprawdzić:")
     print("1- wielkość plików")
     print("2- datę modyfikacji")
     choice = input()
-
-    # Przechowanie listy wszystkich plikow ze sciezki
-    file_list = os.listdir(type_path)
-    
+        
         # Wylistowanie wszystkich plikow i ich wielkosci
     if (choice == '1'):
         for plik in file_list:
