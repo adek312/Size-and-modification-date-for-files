@@ -22,14 +22,12 @@ def main():
             print("Co chcesz sprawdzić:")
             print("1- wielkość plików")
             print("2- datę modyfikacji")
-            print("3- test")
             choice = int(input())
             break
         except ValueError:
             print("Niepoprawny wybór")    
     if choice == 1: file_size(file_list, type_path)
     elif choice == 2: list_modification(file_list, type_path)
-    elif choice == 3: sorting(file_list, type_path)
 
 
 
@@ -43,14 +41,32 @@ def file_size(file_list, type_path):
             #? Jest przesyłana do funkcji m_o_g, która sprawdza czy wielkość ma być
             #? Podana w GB lub MB
             megaOrGiga = megabytes_or_gigabytes(directory_size(full_path))
-            print('Plik {} waży: {}'.format(plik, megaOrGiga))
+            lista = {}
+            lista[plik] = megaOrGiga
+            for nazwa, rozmiar in lista.items():
+                sorting(nazwa, rozmiar)
         # Plik
         else:
             size = os.path.getsize(full_path)
             megaOrGiga = megabytes_or_gigabytes(size)
-            print('Plik {} waży: {}'.format(plik, megaOrGiga))
+            lista = {}
+            lista[plik] = megaOrGiga
+            #for nazwa, rozmiar in lista.items():
+                #print('{}, {}'.format(nazwa, rozmiar))
 
-#? Obliczanie wielkości folderu
+#TODO zrobić sortowanie najpierw po GB, potem po MB i połączyć GB z MB    
+def sorting(nazwa, rozmiar):
+    #100 GB
+    liczba = rozmiar[0:-3]
+    listaG = {}
+    listaM = {}
+    if rozmiar[-2] == "G": 
+        listaG[nazwa] = rozmiar
+    else: 
+        listaM[nazwa] = rozmiar
+
+    
+#* Obliczanie wielkości folderu
 def directory_size(file_list):
     bytes = 0
     for main_path, katalogi, files in os.walk(file_list):
@@ -67,14 +83,7 @@ def list_modification(file_list, type_path):
             mod_time_str = datetime.datetime.fromtimestamp(mod_time).strftime('%Y-%m-%d o godzinie: %H:%M:%S')
             print('Plik {} użyty był: {}'.format(plik, mod_time_str))
 
-#TOdO Sortowanie plikow pod wzgledem wielkosci
-def sorting(file_list, type_path):
-    for plik in file_list:    
-        full_path = os.path.join(type_path, plik)
-        size = os.path.getsize(full_path)
-        megaOrGiga = megabytes_or_gigabytes(size)
-        print('Plik {} waży: {}'.format(plik, megaOrGiga))
-
+    
 #* Sprawdzenie czy plik jest w GB czy MB
 def megabytes_or_gigabytes(bytes):
     if bytes >= 1024 ** 3: 
