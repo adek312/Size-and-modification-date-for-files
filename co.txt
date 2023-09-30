@@ -2,12 +2,15 @@ zrobione:
 Podanie ścieżki
 wybór co chce sprawdzic
 wylistowanie pliku i folderu z informacjami
+zmiana mb na gb jesli to potrzebne
+sprawdzenie czy to plik czy folder
+
 
 niezrobione:
+zrzutować dane do pliku
 podzielenie kodu na mniejsze funkcje
 sortowanie danych wedlug wielkosci
-sprawdzenie czy to plik czy folder
-zmiana mb na gb jesli to potrzebne
+zarządzanie pamięcią
 
 pomysly:
 dodać jakieś dodatki

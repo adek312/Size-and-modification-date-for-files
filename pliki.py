@@ -56,15 +56,7 @@ def file_size(file_list, type_path):
 
 #TODO zrobić sortowanie najpierw po GB, potem po MB i połączyć GB z MB    
 def sorting(nazwa, rozmiar):
-    #100 GB
-    liczba = rozmiar[0:-3]
-    listaG = {}
-    listaM = {}
-    if rozmiar[-2] == "G": 
-        listaG[nazwa] = rozmiar
-    else: 
-        listaM[nazwa] = rozmiar
-
+    pass
     
 #* Obliczanie wielkości folderu
 def directory_size(file_list):
