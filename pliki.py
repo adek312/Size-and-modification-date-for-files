@@ -56,17 +56,34 @@ def file_size(file_list, type_path):
 def sorting(lista):
     listaG = {}
     listaM = {}
+    # Oddzielenie Gigabajtow od Megabajtow
     for nazwa, rozmiar in lista.items():
         if rozmiar[-2] == 'G':
             liczbaG = rozmiar[:-2]
             float(liczbaG)
-            lista[nazwa] = liczbaG
+            listaG[nazwa] = liczbaG
         else:
             liczbaM = rozmiar[:-2]
             float(liczbaM)
-            lista[nazwa] = liczbaM
+            listaM[nazwa] = liczbaM
+    
+    # Posortowanie listy Gigabajtowej  
+    sortListaG = dict(sorted(listaG.items(), key=lambda item: float(item[1])))
+    # Dodanie G do rozmiaru pliku
+    for nazwa, rozmiar in sortListaG.items():
+        sortListaG[nazwa] = {rozmiar: "G"}
         
-    print(lista)
+    # Posortowanie listy Megabajtowej
+    sortListaM = dict(sorted(listaM.items(), key=lambda item: float(item[1])))
+    # Dodanie M do rozmiaru pliku
+    for nazwa, rozmiar in sortListaM.items():
+        sortListaM[nazwa] = {rozmiar: "M"}
+    
+    # Zlaczenie obu slownikow i rozpakowanie ich wartosci
+    wynik = {**sortListaG, **sortListaM}
+    for nazwa, zagniezdzony_slownik in wynik.items():
+        for rozmiar, bajt in zagniezdzony_slownik.items():
+            print(f"{nazwa}, {rozmiar}{bajt}")
 
        
 

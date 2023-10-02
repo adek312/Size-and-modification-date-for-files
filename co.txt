@@ -4,12 +4,12 @@ wybór co chce sprawdzic
 wylistowanie pliku i folderu z informacjami
 zmiana mb na gb jesli to potrzebne
 sprawdzenie czy to plik czy folder
+sortowanie danych wedlug wielkosci
 
 
 niezrobione:
 zrzutować dane do pliku
 podzielenie kodu na mniejsze funkcje
-sortowanie danych wedlug wielkosci
 zarządzanie pamięcią
 
 pomysly:
