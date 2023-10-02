@@ -1,5 +1,6 @@
 import os
 import datetime
+import json
 
 def main():
     
@@ -50,9 +51,20 @@ def file_size(file_list, type_path):
             megaOrGiga = megabytes_or_gigabytes(size)
             lista[plik] = megaOrGiga
 
-    sorting(lista)
+    zapisz(sorting(lista))
     
-#TODO zrobić sortowanie najpierw po GB, potem po MB i połączyć GB z MB    
+#* Zapisanie wyniku funkcji sorting do pliku json
+def zapisz(dane):
+    nazwa_pliku = "wielkosci.json"
+    try:
+        with open(nazwa_pliku, 'w') as plik:
+            json.dump(dane, plik, indent=4)  # Serializuj słownik do formatu JSON
+        print(f'Dane zostały dodane do pliku {nazwa_pliku}.')
+    except IOError as e:
+        print(f'Wystąpił błąd podczas zapisywania do pliku: {str(e)}')
+    
+    
+#* Sortowanie wielkosci
 def sorting(lista):
     listaG = {}
     listaM = {}
@@ -81,9 +93,10 @@ def sorting(lista):
     
     # Zlaczenie obu slownikow i rozpakowanie ich wartosci
     wynik = {**sortListaG, **sortListaM}
-    for nazwa, zagniezdzony_slownik in wynik.items():
-        for rozmiar, bajt in zagniezdzony_slownik.items():
-            print(f"{nazwa}, {rozmiar}{bajt}")
+    return wynik
+    #for nazwa, zagniezdzony_slownik in wynik.items():
+        #for rozmiar, bajt in zagniezdzony_slownik.items():
+            #print(f"{nazwa}, {rozmiar}{bajt}")
 
        
 
