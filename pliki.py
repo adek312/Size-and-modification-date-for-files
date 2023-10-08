@@ -55,6 +55,20 @@ def file_size(file_list, type_path):
 
     zapisz(sorting(lista))
     
+
+#* Wylistowanie czasu modyfikacji
+def list_modification(file_list, type_path):
+    modyfikacja = {}
+    for plik in file_list:
+            full_path = os.path.join(type_path, plik)
+            mod_time = os.path.getmtime(full_path)
+            mod_time_str = datetime.datetime.fromtimestamp(mod_time).strftime('%Y-%m-%d o godzinie: %H:%M:%S')
+            modyfikacja[plik] = mod_time_str
+            #print('Plik {} użyty był: {}'.format(plik, mod_time_str))
+            
+    zapisz(modyfikacja)
+    
+    
 #* Zapisanie wyniku funkcji sorting do pliku json
 def zapisz(dane):
     numer = 1
@@ -129,15 +143,6 @@ def megabytes_or_gigabytes(bytes):
         Mbytes = bytes / (1024 ** 2)
         return f"{Mbytes:.2f} MB"
     
-#* Wylistowanie czasu modyfikacji
-def list_modification(file_list, type_path):
-    for plik in file_list:
-            full_path = os.path.join(type_path, plik)
-            mod_time = os.path.getmtime(full_path)
-            mod_time_str = datetime.datetime.fromtimestamp(mod_time).strftime('%Y-%m-%d o godzinie: %H:%M:%S')
-            print('Plik {} użyty był: {}'.format(plik, mod_time_str))
-    
-
 
 
 
