@@ -2,6 +2,8 @@ import os
 import datetime
 import json
 
+data = datetime.date.today()
+
 def main():
     
     #* Zczytanie sciezki
@@ -55,10 +57,18 @@ def file_size(file_list, type_path):
     
 #* Zapisanie wyniku funkcji sorting do pliku json
 def zapisz(dane):
-    nazwa_pliku = "wielkosci.json"
+    numer = 1
+    nazwa_pliku = f"{data} rozmiar{numer}.json"
+    while os.path.isfile(nazwa_pliku):
+        numer += 1
+        nazwa_pliku = f"{data} rozmiar{numer}.json"
     try:
         with open(nazwa_pliku, 'w') as plik:
-            json.dump(dane, plik, indent=4)  # Serializuj słownik do formatu JSON
+            if os.path.isfile(nazwa_pliku):
+                numer += 1
+                json.dump(dane, plik, indent=4)  # Serializuj słownik do formatu JSON
+            else:
+                json.dump(dane, plik, indent=4)  # Serializuj słownik do formatu JSON
         print(f'Dane zostały dodane do pliku {nazwa_pliku}.')
     except IOError as e:
         print(f'Wystąpił błąd podczas zapisywania do pliku: {str(e)}')
@@ -80,13 +90,13 @@ def sorting(lista):
             listaM[nazwa] = liczbaM
     
     # Posortowanie listy Gigabajtowej  
-    sortListaG = dict(sorted(listaG.items(), key=lambda item: float(item[1])))
+    sortListaG = dict(sorted(listaG.items(), key=lambda item: float(item[1]), reverse = True))
     # Dodanie G do rozmiaru pliku
     for nazwa, rozmiar in sortListaG.items():
         sortListaG[nazwa] = {rozmiar: "G"}
         
     # Posortowanie listy Megabajtowej
-    sortListaM = dict(sorted(listaM.items(), key=lambda item: float(item[1])))
+    sortListaM = dict(sorted(listaM.items(), key=lambda item: float(item[1]), reverse= True))
     # Dodanie M do rozmiaru pliku
     for nazwa, rozmiar in sortListaM.items():
         sortListaM[nazwa] = {rozmiar: "M"}
@@ -94,6 +104,7 @@ def sorting(lista):
     # Zlaczenie obu slownikow i rozpakowanie ich wartosci
     wynik = {**sortListaG, **sortListaM}
     return wynik
+    # Wylistowanie zagniezdzonego slownika
     #for nazwa, zagniezdzony_slownik in wynik.items():
         #for rozmiar, bajt in zagniezdzony_slownik.items():
             #print(f"{nazwa}, {rozmiar}{bajt}")
