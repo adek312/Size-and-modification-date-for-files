@@ -1,5 +1,7 @@
 # Directory size and modification date checker
 
 Skrypt sprawdza wielkość folderów i plików lub ostatnią datę modyfikacji w podanej ścieżce. <br>
-<br>
-This script can check size or modification date of every file in given directory.
+Zapraszam do poprawiania kodu i/lub usprawniania skryptu. <br>
+
+This script can check size or modification date of every file in given directory.<br>
+Every improvements or adding new features are welcome.
